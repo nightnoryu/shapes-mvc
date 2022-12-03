@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+    shapes-mvc:
+        build: .
+        container_name: shapes-mvc
+        hostname: shapes-mvc
+        stdin_open: true
+        tty: true
+        environment:
+            WATCHPACK_POLLING: "true"
+        volumes:
+            - ${PWD}:/app
+            - /app/node_modules
+        ports:
+            - "3000:3000"
