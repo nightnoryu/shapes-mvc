@@ -1,11 +1,15 @@
-import React from 'react';
+import React from 'react'
+import Menu from './view/Menu/Menu'
+import DocumentView from './view/DocumentView/DocumentView'
 
-function App() {
-  return (
-    <div className="App">
-      The lonely guy I am I wait for her to change
-    </div>
-  );
+function App(): JSX.Element
+{
+    return (
+        <div className="App">
+            <Menu />
+            <DocumentView />
+        </div>
+    )
 }
 
-export default App;
+export default App
