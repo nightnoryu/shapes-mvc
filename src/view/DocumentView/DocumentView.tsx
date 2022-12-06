@@ -7,13 +7,20 @@ import RectangleView from './RectangleView/RectangleView'
 import TriangleView from './TriangleView/TriangleView'
 import EllipseView from './EllipseView/EllipseView'
 import DocumentInterface from '../../model/DocumentInterface'
-import { connect } from '../../controller/Utils'
+import { connect } from '../../controller/Main'
+import DocumentControllerInterface from '../../controller/DocumentControllerInterface'
 
-type DocumentViewProps = {
+type DocumentViewModelProps = {
     shapes: ShapeInterface[]
 }
 
-function DocumentView({ shapes }: DocumentViewProps): JSX.Element
+type DocumentViewControllerProps = {
+    test: () => void
+}
+
+type DocumentViewProps = DocumentViewModelProps & DocumentViewControllerProps;
+
+function DocumentView({ shapes, test }: DocumentViewProps): JSX.Element
 {
     return (
         <svg
@@ -21,6 +28,10 @@ function DocumentView({ shapes }: DocumentViewProps): JSX.Element
             className={styles.document}
             tabIndex={0}
             onDragOver={event => event.preventDefault()}
+            onClick={event => {
+                event.preventDefault()
+                test()
+            }}
         >
             {shapes.map(shape => {
                 switch (shape.getType())
@@ -48,8 +59,12 @@ function DocumentView({ shapes }: DocumentViewProps): JSX.Element
     )
 }
 
-const mapModelToProps = (model: DocumentInterface): DocumentViewProps => ({
+const mapModelToProps = (model: DocumentInterface): DocumentViewModelProps => ({
     shapes: model.getShapes(),
 })
 
-export default connect(mapModelToProps)(DocumentView)
+const mapControllerToProps = (controller: DocumentControllerInterface): DocumentViewControllerProps => ({
+    test: controller.testAction,
+})
+
+export default connect(mapModelToProps, mapControllerToProps)(DocumentView)
