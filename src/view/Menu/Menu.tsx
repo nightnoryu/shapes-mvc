@@ -6,9 +6,9 @@ function Menu(): JSX.Element
 {
     return (
         <div className={styles.menu}>
-            <Button action={() => console.log('Rectangle')} />
-            <Button action={() => console.log('Triangle')} />
-            <Button action={() => console.log('Ellipse')} />
+            <Button label={'Rectangle'} action={() => console.log('Rectangle')} />
+            <Button label={'Triangle'} action={() => console.log('Triangle')} />
+            <Button label={'Ellipse'} action={() => console.log('Ellipse')} />
         </div>
     )
 }

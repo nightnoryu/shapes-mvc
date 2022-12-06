@@ -1,6 +1,4 @@
 import React from 'react'
-import { connect } from '../../../controller/Utils'
-import Point from '../../../model/Point'
 
 type ButtonProps = {
     label: string
@@ -21,9 +19,4 @@ function Button({ label, action }: ButtonProps): JSX.Element
     )
 }
 
-const mapModelToProps = (model: Point, ownProps: ButtonProps): ButtonProps => ({
-    ...ownProps,
-    label: model.x.toString(),
-})
-
-export default connect(mapModelToProps)(Button)
+export default Button
