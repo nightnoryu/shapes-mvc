@@ -10,6 +10,17 @@ class Document implements DocumentInterface
         return this._shapes
     }
 
+    getShapeById(id: string): ShapeInterface | null
+    {
+        const shape = this._shapes.find(shape => shape.getId() === id)
+        if (!shape)
+        {
+            return null
+        }
+
+        return shape
+    }
+
     addShape(shape: ShapeInterface): void
     {
         this._shapes.push(shape)

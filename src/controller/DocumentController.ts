@@ -1,8 +1,20 @@
 import DocumentInterface from '../model/DocumentInterface'
 import DocumentControllerInterface from './DocumentControllerInterface'
+import ShapeType from '../model/ShapeType'
+import Shape from '../model/Shape'
+import { v4 as uuid } from 'uuid'
 
 class DocumentController implements DocumentControllerInterface
 {
+    private static readonly _DEFAULT_FRAME = {
+        leftTop: {
+            x: 100,
+            y: 100,
+        },
+        width: 100,
+        height: 100,
+    }
+
     private readonly _model: DocumentInterface
 
     constructor(model: DocumentInterface)
@@ -10,9 +22,32 @@ class DocumentController implements DocumentControllerInterface
         this._model = model
     }
 
-    testAction(): void
+    addShape(type: ShapeType): void
     {
-        alert('Hello!')
+        this._model.addShape(new Shape(uuid(), type, DocumentController._DEFAULT_FRAME))
+    }
+
+    removeShape(id: string): void
+    {
+        this._model.removeShape(id)
+    }
+
+    moveShape(id: string, deltaX: number, deltaY: number): void
+    {
+        const shape = this._model.getShapeById(id)
+        if (!shape)
+        {
+            return
+        }
+        const leftTop = shape.getFrame().leftTop
+
+        shape.setFrame({
+            ...shape.getFrame(),
+            leftTop: {
+                x: leftTop.x + deltaX,
+                y: leftTop.y + deltaY,
+            },
+        })
     }
 }
 
