@@ -1,6 +1,7 @@
 import React from 'react'
 import ShapeInterface from '../../../model/ShapeInterface'
 import Point from '../../../model/common/Point'
+import Settings from '../../../model/Settings'
 
 type TriangleViewProps = {
     shape: ShapeInterface
@@ -11,6 +12,8 @@ function TriangleView({ shape }: TriangleViewProps): JSX.Element
     return (
         <polygon
             points={getTrianglePointsAsPath(shape)}
+            fill={Settings.SHAPE_FILL_COLOR}
+            stroke={Settings.SHAPE_STROKE_COLOR}
         />
     )
 }
