@@ -1,11 +1,12 @@
 import React from 'react'
 import ShapeInterface from '../../../model/ShapeInterface'
+import Settings from '../../../model/Settings'
 
 type RectangleViewProps = {
     shape: ShapeInterface
 }
 
-function RectangleView({shape}: RectangleViewProps): JSX.Element
+function RectangleView({ shape }: RectangleViewProps): JSX.Element
 {
     return (
         <rect
@@ -13,8 +14,8 @@ function RectangleView({shape}: RectangleViewProps): JSX.Element
             y={shape.getFrame().leftTop.y}
             width={shape.getFrame().width}
             height={shape.getFrame().height}
-            fill="#000000"
-            stroke="#000000"
+            fill={Settings.SHAPE_FILL_COLOR}
+            stroke={Settings.SHAPE_STROKE_COLOR}
         />
     )
 }
