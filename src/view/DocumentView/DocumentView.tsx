@@ -8,6 +8,7 @@ import TriangleView from './TriangleView/TriangleView'
 import EllipseView from './EllipseView/EllipseView'
 import DocumentInterface from '../../model/DocumentInterface'
 import { connect } from '../../controller/Main'
+import useUpdateOnPropsChange from '../../hooks/useUpdateOnPropsChange'
 
 type DocumentViewProps = {
     shapes: ShapeInterface[]
@@ -15,6 +16,8 @@ type DocumentViewProps = {
 
 function DocumentView({ shapes }: DocumentViewProps): JSX.Element
 {
+    useUpdateOnPropsChange(shapes)
+
     return (
         <svg
             viewBox={`0 0 ${Settings.DOCUMENT_WIDTH} ${Settings.DOCUMENT_HEIGHT}`}

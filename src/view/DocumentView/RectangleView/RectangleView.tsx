@@ -5,7 +5,7 @@ type RectangleViewProps = {
     shape: ShapeInterface
 }
 
-function RectangleView({ shape }: RectangleViewProps): JSX.Element
+function RectangleView({shape}: RectangleViewProps): JSX.Element
 {
     return (
         <rect
@@ -13,6 +13,8 @@ function RectangleView({ shape }: RectangleViewProps): JSX.Element
             y={shape.getFrame().leftTop.y}
             width={shape.getFrame().width}
             height={shape.getFrame().height}
+            fill="#000000"
+            stroke="#000000"
         />
     )
 }

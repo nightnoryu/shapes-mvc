@@ -11,7 +11,6 @@ type MenuProps = {
     addEllipse: () => void,
 }
 
-
 function Menu({ addRectangle, addTriangle, addEllipse }: MenuProps): JSX.Element
 {
     return (
