@@ -1,6 +1,6 @@
 import React from 'react'
 import './index.css'
-import View from './View'
+import View from './view/View'
 import ReactDOM from 'react-dom/client'
 import Editor from './model/Editor'
 import EditorController from './controller/EditorController'

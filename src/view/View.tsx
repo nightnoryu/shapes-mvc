@@ -1,10 +1,10 @@
 import React from 'react'
-import Menu from './view/Menu/Menu'
-import DocumentView from './view/DocumentView/DocumentView'
-import ShapeViewInterface from './model/ShapeViewInterface'
-import EditorControllerInterface from './controller/EditorControllerInterface'
-import ShapeType from './model/ShapeType'
-import Point from './model/common/Point'
+import Menu from './Menu/Menu'
+import DocumentView from './DocumentView/DocumentView'
+import ShapeViewInterface from '../model/ShapeViewInterface'
+import EditorControllerInterface from '../controller/EditorControllerInterface'
+import ShapeType from '../model/ShapeType'
+import Point from '../model/common/Point'
 
 type ViewProps = {
     shapes: ShapeViewInterface[]
