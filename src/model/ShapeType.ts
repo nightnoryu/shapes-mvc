@@ -1,5 +1,4 @@
-enum ShapeType
-{
+enum ShapeType {
     RECTANGLE,
     TRIANGLE,
     ELLIPSE,

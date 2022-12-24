@@ -2,36 +2,30 @@ import ShapeInterface from './ShapeInterface'
 import Frame from './common/Frame'
 import ShapeType from './ShapeType'
 
-class Shape implements ShapeInterface
-{
+class Shape implements ShapeInterface {
     private readonly _id: string
     private readonly _type: ShapeType
     private _frame: Frame
 
-    constructor(id: string, type: ShapeType, frame: Frame)
-    {
+    constructor(id: string, type: ShapeType, frame: Frame) {
         this._id = id
         this._type = type
         this._frame = frame
     }
 
-    getId(): string
-    {
+    getId(): string {
         return this._id
     }
 
-    getType(): ShapeType
-    {
+    getType(): ShapeType {
         return this._type
     }
 
-    getFrame(): Frame
-    {
+    getFrame(): Frame {
         return this._frame
     }
 
-    setFrame(frame: Frame): void
-    {
+    setFrame(frame: Frame): void {
         this._frame = frame
     }
 }

@@ -1,10 +1,10 @@
-import DocumentInterface from '../model/DocumentInterface'
-import DocumentControllerInterface from './DocumentControllerInterface'
+import EditorInterface from '../model/EditorInterface'
+import EditorControllerInterface from './EditorControllerInterface'
 import ShapeType from '../model/ShapeType'
 import Shape from '../model/Shape'
 import { v4 as uuid } from 'uuid'
 
-class DocumentController implements DocumentControllerInterface
+class DocumentController implements EditorControllerInterface
 {
     private static readonly _DEFAULT_FRAME = {
         leftTop: {
@@ -15,9 +15,9 @@ class DocumentController implements DocumentControllerInterface
         height: 100,
     }
 
-    private readonly _model: DocumentInterface
+    private readonly _model: EditorInterface
 
-    constructor(model: DocumentInterface)
+    constructor(model: EditorInterface)
     {
         this._model = model
     }

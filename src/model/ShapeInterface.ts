@@ -1,14 +1,7 @@
 import Frame from './common/Frame'
-import ShapeType from './ShapeType'
+import ShapeViewInterface from './ShapeViewInterface'
 
-interface ShapeInterface
-{
-    getId(): string;
-
-    getType(): ShapeType;
-
-    getFrame(): Frame;
-
+interface ShapeInterface extends ShapeViewInterface {
     setFrame(frame: Frame): void;
 }
 
