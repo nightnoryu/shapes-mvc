@@ -1,6 +1,6 @@
 import React from 'react'
 import Menu from './Menu/Menu'
-import DocumentView from './DocumentView/DocumentView'
+import EditorView from './DocumentView/EditorView'
 import ShapeViewInterface from '../model/ShapeViewInterface'
 import EditorControllerInterface from '../controller/EditorControllerInterface'
 import ShapeType from '../model/ShapeType'
@@ -32,7 +32,7 @@ function View({ shapes, controller }: ViewProps): JSX.Element {
                 addTriangle={addTriangle}
                 addEllipse={addEllipse}
             />
-            <DocumentView
+            <EditorView
                 shapes={shapes}
                 moveShape={moveShape}
             />

@@ -9,12 +9,12 @@ import ShapeViewInterface from '../../model/ShapeViewInterface'
 import useScaleFactorForDragAndDrop from '../../hooks/dragAndDrop/useScaleFactorForDragAndDrop'
 import Point from '../../model/common/Point'
 
-type DocumentViewProps = {
+type EditorViewProps = {
     shapes: ShapeViewInterface[]
     moveShape: (id: string, delta: Point) => void
 }
 
-function DocumentView({ shapes, moveShape }: DocumentViewProps): JSX.Element {
+function EditorView({ shapes, moveShape }: EditorViewProps): JSX.Element {
     const ref = useRef(null)
     const scaleFactor = useScaleFactorForDragAndDrop(ref, Settings.DOCUMENT_WIDTH)
 
@@ -57,4 +57,4 @@ function DocumentView({ shapes, moveShape }: DocumentViewProps): JSX.Element {
     )
 }
 
-export default DocumentView
+export default EditorView
