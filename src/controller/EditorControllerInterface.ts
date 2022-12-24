@@ -1,7 +1,6 @@
 import ShapeType from '../model/ShapeType'
 
-interface DocumentControllerInterface
-{
+interface EditorControllerInterface {
     addShape(type: ShapeType): void
 
     removeShape(id: string): void
@@ -9,4 +8,4 @@ interface DocumentControllerInterface
     moveShape(id: string, deltaX: number, deltaY: number): void
 }
 
-export default DocumentControllerInterface
+export default EditorControllerInterface

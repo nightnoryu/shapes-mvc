@@ -1,27 +1,19 @@
-import React, { useRef, useState } from 'react'
+import React from 'react'
 import Settings from '../../model/Settings'
 import styles from './DocumentView.module.css'
-import ShapeInterface from '../../model/ShapeInterface'
 import ShapeType from '../../model/ShapeType'
 import RectangleView from './RectangleView/RectangleView'
 import TriangleView from './TriangleView/TriangleView'
 import EllipseView from './EllipseView/EllipseView'
-import DocumentInterface from '../../model/DocumentInterface'
-import { connect } from '../../controller/Main'
-import useScaleFactorForDragAndDrop from '../../hooks/dragAndDrop/useScaleFactorForDragAndDrop'
+import ShapeViewInterface from '../../model/ShapeViewInterface'
 
 type DocumentViewProps = {
-    shapes: ShapeInterface[]
+    shapes: ShapeViewInterface[]
 }
 
 function DocumentView({ shapes }: DocumentViewProps): JSX.Element {
-    const ref = useRef(null)
-    const scaleFactor = useScaleFactorForDragAndDrop(ref)
-    const [delta, setDelta] = useState({ x: 0, y: 0 })
-
     return (
         <svg
-            ref={ref}
             viewBox={`0 0 ${Settings.DOCUMENT_WIDTH} ${Settings.DOCUMENT_HEIGHT}`}
             className={styles.document}
             tabIndex={0}
@@ -33,10 +25,6 @@ function DocumentView({ shapes }: DocumentViewProps): JSX.Element {
                         return <RectangleView
                             key={shape.getId()}
                             shape={shape}
-                            scaleFactor={scaleFactor}
-                            delta={delta}
-                            setDelta={setDelta}
-                            isSelected={false}
                         />
                     case ShapeType.TRIANGLE:
                         return <TriangleView
@@ -56,8 +44,4 @@ function DocumentView({ shapes }: DocumentViewProps): JSX.Element {
     )
 }
 
-const mapModelToProps = (model: DocumentInterface): DocumentViewProps => ({
-    shapes: model.getShapes(),
-})
-
-export default connect(mapModelToProps, null)(DocumentView)
+export default DocumentView

@@ -1,14 +1,13 @@
 import React from 'react'
-import ShapeInterface from '../../../model/ShapeInterface'
 import Point from '../../../model/common/Point'
 import Settings from '../../../model/Settings'
+import ShapeViewInterface from '../../../model/ShapeViewInterface'
 
 type TriangleViewProps = {
-    shape: ShapeInterface
+    shape: ShapeViewInterface
 }
 
-function TriangleView({ shape }: TriangleViewProps): JSX.Element
-{
+function TriangleView({ shape }: TriangleViewProps): JSX.Element {
     return (
         <polygon
             points={getTrianglePointsAsPath(shape)}
@@ -18,8 +17,7 @@ function TriangleView({ shape }: TriangleViewProps): JSX.Element
     )
 }
 
-function getTrianglePointsAsPath(triangle: ShapeInterface): string
-{
+function getTrianglePointsAsPath(triangle: ShapeViewInterface): string {
     const points = calculateTrianglePoints(triangle)
 
     return points
@@ -27,8 +25,7 @@ function getTrianglePointsAsPath(triangle: ShapeInterface): string
         .join(' ')
 }
 
-export function calculateTrianglePoints(triangle: ShapeInterface): [Point, Point, Point]
-{
+export function calculateTrianglePoints(triangle: ShapeViewInterface): [Point, Point, Point] {
     const leftTop = triangle.getFrame().leftTop
 
     const firstPoint = {

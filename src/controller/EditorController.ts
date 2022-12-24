@@ -1,11 +1,10 @@
-import EditorInterface from '../model/EditorInterface'
 import EditorControllerInterface from './EditorControllerInterface'
 import ShapeType from '../model/ShapeType'
 import Shape from '../model/Shape'
 import { v4 as uuid } from 'uuid'
+import { EditorInterface } from '../model/EditorInterface'
 
-class DocumentController implements EditorControllerInterface
-{
+class EditorController implements EditorControllerInterface {
     private static readonly _DEFAULT_FRAME = {
         leftTop: {
             x: 100,
@@ -17,38 +16,29 @@ class DocumentController implements EditorControllerInterface
 
     private readonly _model: EditorInterface
 
-    constructor(model: EditorInterface)
-    {
+    constructor(model: EditorInterface) {
         this._model = model
     }
 
-    addShape(type: ShapeType): void
-    {
-        this._model.addShape(new Shape(uuid(), type, DocumentController._DEFAULT_FRAME))
+    addShape(type: ShapeType): void {
+        this._model.addShape(new Shape(uuid(), type, EditorController._DEFAULT_FRAME))
     }
 
-    removeShape(id: string): void
-    {
+    removeShape(id: string): void {
         this._model.removeShape(id)
     }
 
-    moveShape(id: string, deltaX: number, deltaY: number): void
-    {
-        const shape = this._model.getShapeById(id)
-        if (!shape)
-        {
-            return
-        }
-        const leftTop = shape.getFrame().leftTop
-
-        shape.setFrame({
-            ...shape.getFrame(),
-            leftTop: {
-                x: leftTop.x + deltaX,
-                y: leftTop.y + deltaY,
-            },
+    moveShape(id: string, deltaX: number, deltaY: number): void {
+        this._model.setShapeFrame(id, frame => {
+            return {
+                ...frame,
+                leftTop: {
+                    x: frame.leftTop.x + deltaX,
+                    y: frame.leftTop.y + deltaY,
+                },
+            }
         })
     }
 }
 
-export default DocumentController
+export default EditorController

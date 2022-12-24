@@ -1,13 +1,12 @@
 import React from 'react'
-import ShapeInterface from '../../../model/ShapeInterface'
 import Settings from '../../../model/Settings'
+import ShapeViewInterface from '../../../model/ShapeViewInterface'
 
 type EllipseViewProps = {
-    shape: ShapeInterface
+    shape: ShapeViewInterface
 }
 
-function EllipseView({ shape }: EllipseViewProps): JSX.Element
-{
+function EllipseView({ shape }: EllipseViewProps): JSX.Element {
     const leftTop = shape.getFrame().leftTop
     const width = shape.getFrame().width
     const height = shape.getFrame().height
