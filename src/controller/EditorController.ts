@@ -14,22 +14,22 @@ class EditorController implements EditorControllerInterface {
         height: 100,
     }
 
-    private readonly _model: EditorInterface
+    private readonly _editor: EditorInterface
 
-    constructor(model: EditorInterface) {
-        this._model = model
+    constructor(editor: EditorInterface) {
+        this._editor = editor
     }
 
     addShape(type: ShapeType): void {
-        this._model.addShape(new Shape(uuid(), type, EditorController._DEFAULT_FRAME))
+        this._editor.addShape(new Shape(uuid(), type, EditorController._DEFAULT_FRAME))
     }
 
     removeShape(id: string): void {
-        this._model.removeShape(id)
+        this._editor.removeShape(id)
     }
 
     moveShape(id: string, deltaX: number, deltaY: number): void {
-        this._model.setShapeFrame(id, frame => {
+        this._editor.setShapeFrame(id, frame => {
             return {
                 ...frame,
                 leftTop: {
