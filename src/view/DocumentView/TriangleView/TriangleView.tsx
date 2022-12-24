@@ -1,27 +1,41 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Point from '../../../model/common/Point'
 import Settings from '../../../model/Settings'
 import ShapeViewInterface from '../../../model/ShapeViewInterface'
+import useShapeDragAndDrop from '../../../hooks/shapes/useShapeDragAndDrop'
 
 type TriangleViewProps = {
     shape: ShapeViewInterface
+    scaleFactor: number
+    moveShape: (id: string, delta: Point) => void
 }
 
-function TriangleView({ shape }: TriangleViewProps): JSX.Element {
+function TriangleView({ shape, scaleFactor, moveShape }: TriangleViewProps): JSX.Element {
+    const ref = useRef(null)
+
+    const delta = useShapeDragAndDrop(
+        ref,
+        shape,
+        scaleFactor,
+        false,
+        delta => moveShape(shape.getId(), delta),
+    )
+
     return (
         <polygon
-            points={getTrianglePointsAsPath(shape)}
+            ref={ref}
+            points={getTrianglePointsAsPath(shape, delta)}
             fill={Settings.SHAPE_FILL_COLOR}
             stroke={Settings.SHAPE_STROKE_COLOR}
         />
     )
 }
 
-function getTrianglePointsAsPath(triangle: ShapeViewInterface): string {
+function getTrianglePointsAsPath(triangle: ShapeViewInterface, delta: Point): string {
     const points = calculateTrianglePoints(triangle)
 
     return points
-        .map(point => `${point.x},${point.y}`)
+        .map(point => `${point.x + delta.x},${point.y + delta.y}`)
         .join(' ')
 }
 

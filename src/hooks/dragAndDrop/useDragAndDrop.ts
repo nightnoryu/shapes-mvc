@@ -7,14 +7,12 @@ function useDragAndDrop<T extends EventTarget>(
     onStart?: DragAndDropHandler,
     onMove?: DragAndDropHandler,
     onFinish?: DragAndDropHandler,
-): void
-{
+): void {
     const savedOnFinish = useRef<DragAndDropHandler>()
 
     const onMouseDown = (e: Event) => {
         const event = e as MouseEvent
-        if (event.button !== 0)
-        {
+        if (event.button !== 0) {
             return
         }
 
@@ -36,15 +34,15 @@ function useDragAndDrop<T extends EventTarget>(
     }
 
     useEffect(() => {
-        if (savedOnFinish.current !== onFinish)
-        {
+        if (savedOnFinish.current !== onFinish) {
             savedOnFinish.current = onFinish
         }
 
-        ref?.current?.addEventListener('mousedown', onMouseDown)
+        const node = ref?.current
+        node?.addEventListener('mousedown', onMouseDown)
 
         return () => {
-            ref?.current?.removeEventListener('mousedown', onMouseDown)
+            node?.removeEventListener('mousedown', onMouseDown)
         }
     })
 }

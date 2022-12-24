@@ -4,6 +4,7 @@ import DocumentView from './view/DocumentView/DocumentView'
 import ShapeViewInterface from './model/ShapeViewInterface'
 import EditorControllerInterface from './controller/EditorControllerInterface'
 import ShapeType from './model/ShapeType'
+import Point from './model/common/Point'
 
 type ViewProps = {
     shapes: ShapeViewInterface[]
@@ -20,6 +21,9 @@ function View({ shapes, controller }: ViewProps): JSX.Element {
     const addEllipse = () => {
         controller.addShape(ShapeType.ELLIPSE)
     }
+    const moveShape = (id: string, delta: Point) => {
+        controller.moveShape(id, delta.x, delta.y)
+    }
 
     return (
         <div className="View">
@@ -28,7 +32,10 @@ function View({ shapes, controller }: ViewProps): JSX.Element {
                 addTriangle={addTriangle}
                 addEllipse={addEllipse}
             />
-            <DocumentView shapes={shapes} />
+            <DocumentView
+                shapes={shapes}
+                moveShape={moveShape}
+            />
         </div>
     )
 }

@@ -1,30 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useDragAndDrop from '../dragAndDrop/useDragAndDrop'
 import Point from '../../model/common/Point'
-import ShapeInterface from '../../model/ShapeInterface'
+import ShapeViewInterface from '../../model/ShapeViewInterface'
 
 function useShapeDragAndDrop<T extends SVGElement>(
     ref: React.RefObject<T> | null,
-    shape: ShapeInterface,
+    shape: ShapeViewInterface,
     scaleFactor: number,
-    delta: Point,
-    setDelta: (delta: Point) => void,
     isSelected: boolean,
-    moveElements: (delta: Point) => void,
-    setCurrentElement: (shapeId: string) => void,
-): void
-{
+    moveShape: (delta: Point) => void,
+): Point {
+    const [delta, setDelta] = useState({ x: 0, y: 0 })
     let startPos: Point
 
     const onStart = (event: MouseEvent) => {
         startPos = {
             x: event.pageX,
             y: event.pageY,
-        }
-
-        if (!isSelected && !event.ctrlKey)
-        {
-            setCurrentElement?.(shape.getId())
         }
     }
 
@@ -36,14 +28,14 @@ function useShapeDragAndDrop<T extends SVGElement>(
     }
 
     const onFinish = () => {
-        if (delta.x !== 0 && delta.y !== 0)
-        {
-            moveElements(delta)
+        if (delta.x !== 0 && delta.y !== 0) {
+            moveShape(delta)
         }
         setDelta({ x: 0, y: 0 })
     }
 
     useDragAndDrop(ref, onStart, onMove, onFinish)
+    return delta
 }
 
 export default useShapeDragAndDrop
