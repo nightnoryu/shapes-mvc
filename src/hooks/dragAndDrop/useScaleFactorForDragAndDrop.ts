@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import useEventListener from '../useEventListener'
+import useEventListener from '../common/useEventListener'
 
 function useScaleFactorForDragAndDrop<T extends Element>(
     ref: React.RefObject<T>,
