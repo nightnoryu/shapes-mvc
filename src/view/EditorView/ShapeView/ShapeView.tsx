@@ -102,7 +102,7 @@ function ShapeView({ shape, scaleFactor, moveShape, resizeShape, removeShape }: 
     )
 }
 
-export function getResizeAnchorTranslateDelta(
+function getResizeAnchorTranslateDelta(
     frame: Frame,
     delta: Point,
     dimensions: Dimensions,
