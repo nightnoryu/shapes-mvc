@@ -1,8 +1,10 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Point from '../../../model/common/Point'
 import Settings from '../../../model/Settings'
 import ShapeViewInterface from '../../../model/ShapeViewInterface'
 import useShapeDragAndDrop from '../../../hooks/shapes/useShapeDragAndDrop'
+import SelectedOverlay from '../SelectedOverlay/SelectedOverlay'
+import useOnClickOutside from '../../../hooks/common/useOnClickOutside'
 
 type TriangleViewProps = {
     shape: ShapeViewInterface
@@ -13,21 +15,35 @@ type TriangleViewProps = {
 function TriangleView({ shape, scaleFactor, moveShape }: TriangleViewProps): JSX.Element {
     const ref = useRef(null)
 
+    const [isSelected, setIsSelected] = useState(false)
+
     const delta = useShapeDragAndDrop(
         ref,
         shape,
         scaleFactor,
         false,
+        setIsSelected,
         delta => moveShape(shape.getId(), delta),
     )
 
+    useOnClickOutside(
+        () => setIsSelected(false),
+        ref,
+    )
+
     return (
-        <polygon
-            ref={ref}
-            points={getTrianglePointsAsPath(shape, delta)}
-            fill={Settings.SHAPE_FILL_COLOR}
-            stroke={Settings.SHAPE_STROKE_COLOR}
-        />
+        <>
+            <polygon
+                ref={ref}
+                points={getTrianglePointsAsPath(shape, delta)}
+                fill={Settings.SHAPE_FILL_COLOR}
+                stroke={Settings.SHAPE_STROKE_COLOR}
+            />
+            {
+                isSelected &&
+                <SelectedOverlay frame={shape.getFrame()} delta={delta} />
+            }
+        </>
     )
 }
 
