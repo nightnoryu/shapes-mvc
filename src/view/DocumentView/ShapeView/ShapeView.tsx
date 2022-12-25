@@ -8,6 +8,7 @@ import ShapeType from '../../../model/ShapeType'
 import Rectangle from './Shapes/Rectangle/Rectangle'
 import Triangle from './Shapes/Triangle/Triangle'
 import Ellipse from './Shapes/Ellipse/Ellipse'
+import ResizeAnchor from './ResizeAnchor/ResizeAnchor'
 
 type RectangleViewProps = {
     shape: ShapeViewInterface
@@ -67,7 +68,10 @@ function ShapeView({ shape, scaleFactor, moveShape }: RectangleViewProps): JSX.E
             {selectShape()}
             {
                 isSelected &&
-                <SelectedOverlay frame={shape.getFrame()} delta={delta} />
+                <>
+                    <SelectedOverlay frame={shape.getFrame()} delta={delta} />
+                    <ResizeAnchor shape={shape} delta={delta} />
+                </>
             }
         </>
     )

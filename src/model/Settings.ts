@@ -9,6 +9,9 @@ namespace Settings {
     export const SELECTED_OVERLAY_STROKE = '#1563c8'
     export const SELECTED_OVERLAY_STROKE_WIDTH = '2px'
     export const SELECTED_OVERLAY_OPACITY = 0.3
+
+    export const RESIZE_ANCHOR_WIDTH = 8
+    export const RESIZE_ANCHOR_HEIGHT = 8
 }
 
 export default Settings
