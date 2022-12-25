@@ -1,6 +1,6 @@
 import React from 'react'
 import Menu from './Menu/Menu'
-import EditorView from './DocumentView/EditorView'
+import EditorView from './EditorView/EditorView'
 import ShapeViewInterface from '../model/ShapeViewInterface'
 import EditorControllerInterface from '../controller/EditorControllerInterface'
 import ShapeType from '../model/ShapeType'

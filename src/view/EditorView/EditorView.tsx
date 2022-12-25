@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import Settings from '../../model/Settings'
-import styles from './DocumentView.module.css'
+import styles from './EditorView.module.css'
 import ShapeViewInterface from '../../model/ShapeViewInterface'
 import useScaleFactorForDragAndDrop from '../../hooks/dragAndDrop/useScaleFactorForDragAndDrop'
 import Point from '../../model/common/Point'
