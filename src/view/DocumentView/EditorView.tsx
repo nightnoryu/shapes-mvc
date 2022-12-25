@@ -1,13 +1,10 @@
 import React, { useRef } from 'react'
 import Settings from '../../model/Settings'
 import styles from './DocumentView.module.css'
-import ShapeType from '../../model/ShapeType'
-import RectangleView from './RectangleView/RectangleView'
-import TriangleView from './TriangleView/TriangleView'
-import EllipseView from './EllipseView/EllipseView'
 import ShapeViewInterface from '../../model/ShapeViewInterface'
 import useScaleFactorForDragAndDrop from '../../hooks/dragAndDrop/useScaleFactorForDragAndDrop'
 import Point from '../../model/common/Point'
+import ShapeView from './ShapeView/ShapeView'
 
 type EditorViewProps = {
     shapes: ShapeViewInterface[]
@@ -26,33 +23,9 @@ function EditorView({ shapes, moveShape }: EditorViewProps): JSX.Element {
             tabIndex={0}
             onDragOver={event => event.preventDefault()}
         >
-            {shapes.map(shape => {
-                switch (shape.getType()) {
-                    case ShapeType.RECTANGLE:
-                        return <RectangleView
-                            key={shape.getId()}
-                            shape={shape}
-                            scaleFactor={scaleFactor}
-                            moveShape={moveShape}
-                        />
-                    case ShapeType.TRIANGLE:
-                        return <TriangleView
-                            key={shape.getId()}
-                            shape={shape}
-                            scaleFactor={scaleFactor}
-                            moveShape={moveShape}
-                        />
-                    case ShapeType.ELLIPSE:
-                        return <EllipseView
-                            key={shape.getId()}
-                            shape={shape}
-                            scaleFactor={scaleFactor}
-                            moveShape={moveShape}
-                        />
-                    default:
-                        return null
-                }
-            })}
+            {shapes.map(shape => (
+                <ShapeView shape={shape} scaleFactor={scaleFactor} moveShape={moveShape} />
+            ))}
         </svg>
     )
 }

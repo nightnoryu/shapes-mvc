@@ -1,7 +1,7 @@
-import Frame from '../../../model/common/Frame'
+import Frame from '../../../../model/common/Frame'
 import React from 'react'
-import Settings from '../../../model/Settings'
-import Point from '../../../model/common/Point'
+import Settings from '../../../../model/Settings'
+import Point from '../../../../model/common/Point'
 
 type SelectedOverlayProps = {
     frame: Frame
