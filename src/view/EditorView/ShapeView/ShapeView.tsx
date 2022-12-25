@@ -10,7 +10,6 @@ import Triangle from './Shapes/Triangle/Triangle'
 import Ellipse from './Shapes/Ellipse/Ellipse'
 import ResizeAnchor from './ResizeAnchor/ResizeAnchor'
 import useShapeResize from '../../../hooks/shapes/useShapeResize'
-import { SetFrameCallback } from '../../../model/EditorInterface'
 import Frame from '../../../model/common/Frame'
 import Dimensions from '../../../model/common/Dimensions'
 import useHotkey from '../../../hooks/common/useHotkey'
@@ -19,7 +18,7 @@ type RectangleViewProps = {
     shape: ShapeViewInterface
     scaleFactor: number
     moveShape: (id: string, delta: Point) => void
-    resizeShape: (id: string, callback: SetFrameCallback) => void
+    resizeShape: (id: string, dimensions: Dimensions) => void
     removeShape: (id: string) => void
 }
 

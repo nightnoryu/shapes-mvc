@@ -2,13 +2,12 @@ import React, { useState } from 'react'
 import Point from '../../model/common/Point'
 import useDragAndDrop from '../dragAndDrop/useDragAndDrop'
 import ShapeViewInterface from '../../model/ShapeViewInterface'
-import { SetFrameCallback } from '../../model/EditorInterface'
 import Dimensions from '../../model/common/Dimensions'
 
 function useShapeResize<T extends SVGElement>(
     shape: ShapeViewInterface,
     scaleFactor: number,
-    setShapeFrame: (shapeId: string, callback: SetFrameCallback) => void,
+    setShapeFrame: (shapeId: string, dimensions: Dimensions) => void,
     ref: React.RefObject<T>,
 ): Dimensions {
     const [dimensions, setDimensions] = useState({
@@ -45,15 +44,7 @@ function useShapeResize<T extends SVGElement>(
         setDimensions(newDimensions)
     }
 
-    const onFinish = () => {
-        setShapeFrame(
-            shape.getId(),
-            frame => ({
-                ...frame,
-                ...dimensions,
-            }),
-        )
-    }
+    const onFinish = () => setShapeFrame(shape.getId(), dimensions)
 
     useDragAndDrop(ref, onStart, onMove, onFinish)
 

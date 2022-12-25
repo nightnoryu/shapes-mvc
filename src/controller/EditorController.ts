@@ -2,7 +2,7 @@ import EditorControllerInterface from './EditorControllerInterface'
 import ShapeType from '../model/ShapeType'
 import Shape from '../model/Shape'
 import { v4 as uuid } from 'uuid'
-import { EditorInterface, SetFrameCallback } from '../model/EditorInterface'
+import { EditorInterface } from '../model/EditorInterface'
 
 class EditorController implements EditorControllerInterface {
     private static readonly _DEFAULT_FRAME = {
@@ -40,8 +40,12 @@ class EditorController implements EditorControllerInterface {
         })
     }
 
-    setShapeFrame(id: string, callback: SetFrameCallback) {
-        this._editor.setShapeFrame(id, callback)
+    resizeShape(id: string, width: number, height: number) {
+        this._editor.setShapeFrame(id, frame => ({
+            ...frame,
+            width,
+            height,
+        }))
     }
 }
 

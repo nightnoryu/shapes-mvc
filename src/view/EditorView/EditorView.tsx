@@ -5,12 +5,12 @@ import ShapeViewInterface from '../../model/ShapeViewInterface'
 import useScaleFactorForDragAndDrop from '../../hooks/dragAndDrop/useScaleFactorForDragAndDrop'
 import Point from '../../model/common/Point'
 import ShapeView from './ShapeView/ShapeView'
-import { SetFrameCallback } from '../../model/EditorInterface'
+import Dimensions from '../../model/common/Dimensions'
 
 type EditorViewProps = {
     shapes: ShapeViewInterface[]
     moveShape: (id: string, delta: Point) => void
-    resizeShape: (id: string, callback: SetFrameCallback) => void
+    resizeShape: (id: string, dimensions: Dimensions) => void
     removeShape: (id: string) => void
 }
 
