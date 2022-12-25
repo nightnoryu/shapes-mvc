@@ -5,6 +5,7 @@ import ShapeViewInterface from '../model/ShapeViewInterface'
 import EditorControllerInterface from '../controller/EditorControllerInterface'
 import ShapeType from '../model/ShapeType'
 import Point from '../model/common/Point'
+import { SetFrameCallback } from '../model/EditorInterface'
 
 type ViewProps = {
     shapes: ShapeViewInterface[]
@@ -21,8 +22,12 @@ function View({ shapes, controller }: ViewProps): JSX.Element {
     const addEllipse = () => {
         controller.addShape(ShapeType.ELLIPSE)
     }
+
     const moveShape = (id: string, delta: Point) => {
         controller.moveShape(id, delta.x, delta.y)
+    }
+    const resizeShape = (id: string, callback: SetFrameCallback) => {
+        controller.setShapeFrame(id, callback)
     }
 
     return (
@@ -35,6 +40,7 @@ function View({ shapes, controller }: ViewProps): JSX.Element {
             <EditorView
                 shapes={shapes}
                 moveShape={moveShape}
+                resizeShape={resizeShape}
             />
         </div>
     )

@@ -9,17 +9,28 @@ import Rectangle from './Shapes/Rectangle/Rectangle'
 import Triangle from './Shapes/Triangle/Triangle'
 import Ellipse from './Shapes/Ellipse/Ellipse'
 import ResizeAnchor from './ResizeAnchor/ResizeAnchor'
+import useShapeResize from '../../../hooks/shapes/useShapeResize'
+import { SetFrameCallback } from '../../../model/EditorInterface'
+import Frame from '../../../model/common/Frame'
+import Dimensions from '../../../model/common/Dimensions'
 
 type RectangleViewProps = {
     shape: ShapeViewInterface
     scaleFactor: number
     moveShape: (id: string, delta: Point) => void
+    resizeShape: (id: string, callback: SetFrameCallback) => void
 }
 
-function ShapeView({ shape, scaleFactor, moveShape }: RectangleViewProps): JSX.Element {
+function ShapeView({ shape, scaleFactor, moveShape, resizeShape }: RectangleViewProps): JSX.Element {
     const ref = useRef(null)
-
+    const resizeAnchorRef = useRef(null)
     const [isSelected, setIsSelected] = useState(false)
+
+    useOnClickOutside(
+        () => setIsSelected(false),
+        ref,
+        [resizeAnchorRef],
+    )
 
     const delta = useShapeDragAndDrop(
         ref,
@@ -29,13 +40,16 @@ function ShapeView({ shape, scaleFactor, moveShape }: RectangleViewProps): JSX.E
         setIsSelected,
         delta => moveShape(shape.getId(), delta),
     )
-
-    useOnClickOutside(
-        () => setIsSelected(false),
-        ref,
+    const dimensions = useShapeResize(
+        shape,
+        scaleFactor,
+        resizeShape,
+        resizeAnchorRef,
     )
 
-    const selectShape = () => {
+    const resizeAnchorDelta = getResizeAnchorTranslateDelta(shape.getFrame(), delta, dimensions)
+
+    const getShape = () => {
         switch (shape.getType()) {
             case ShapeType.RECTANGLE:
                 return <Rectangle
@@ -43,6 +57,7 @@ function ShapeView({ shape, scaleFactor, moveShape }: RectangleViewProps): JSX.E
                     shape={shape}
                     ref={ref}
                     delta={delta}
+                    dimensions={dimensions}
                 />
             case ShapeType.TRIANGLE:
                 return <Triangle
@@ -50,6 +65,7 @@ function ShapeView({ shape, scaleFactor, moveShape }: RectangleViewProps): JSX.E
                     shape={shape}
                     ref={ref}
                     delta={delta}
+                    dimensions={dimensions}
                 />
             case ShapeType.ELLIPSE:
                 return <Ellipse
@@ -57,6 +73,7 @@ function ShapeView({ shape, scaleFactor, moveShape }: RectangleViewProps): JSX.E
                     frame={shape.getFrame()}
                     ref={ref}
                     delta={delta}
+                    dimensions={dimensions}
                 />
             default:
                 return null
@@ -65,16 +82,29 @@ function ShapeView({ shape, scaleFactor, moveShape }: RectangleViewProps): JSX.E
 
     return (
         <>
-            {selectShape()}
+            {getShape()}
             {
                 isSelected &&
                 <>
-                    <SelectedOverlay frame={shape.getFrame()} delta={delta} />
-                    <ResizeAnchor shape={shape} delta={delta} />
+                    <SelectedOverlay frame={shape.getFrame()} delta={delta} dimensions={dimensions} />
+                    <ResizeAnchor shape={shape} delta={resizeAnchorDelta} ref={resizeAnchorRef} />
                 </>
             }
         </>
     )
+}
+
+export function getResizeAnchorTranslateDelta(
+    frame: Frame,
+    delta: Point,
+    dimensions: Dimensions,
+): Point {
+    return delta.x === 0 && delta.y === 0
+        ? {
+            x: dimensions.width - frame.width,
+            y: dimensions.height - frame.height,
+        }
+        : delta
 }
 
 export default ShapeView

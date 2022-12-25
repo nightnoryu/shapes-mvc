@@ -5,13 +5,15 @@ import ShapeViewInterface from '../../model/ShapeViewInterface'
 import useScaleFactorForDragAndDrop from '../../hooks/dragAndDrop/useScaleFactorForDragAndDrop'
 import Point from '../../model/common/Point'
 import ShapeView from './ShapeView/ShapeView'
+import { SetFrameCallback } from '../../model/EditorInterface'
 
 type EditorViewProps = {
     shapes: ShapeViewInterface[]
     moveShape: (id: string, delta: Point) => void
+    resizeShape: (id: string, callback: SetFrameCallback) => void
 }
 
-function EditorView({ shapes, moveShape }: EditorViewProps): JSX.Element {
+function EditorView({ shapes, moveShape, resizeShape }: EditorViewProps): JSX.Element {
     const ref = useRef(null)
     const scaleFactor = useScaleFactorForDragAndDrop(ref, Settings.DOCUMENT_WIDTH)
 
@@ -24,7 +26,12 @@ function EditorView({ shapes, moveShape }: EditorViewProps): JSX.Element {
             onDragOver={event => event.preventDefault()}
         >
             {shapes.map(shape => (
-                <ShapeView shape={shape} scaleFactor={scaleFactor} moveShape={moveShape} />
+                <ShapeView
+                    shape={shape}
+                    scaleFactor={scaleFactor}
+                    moveShape={moveShape}
+                    resizeShape={resizeShape}
+                />
             ))}
         </svg>
     )
