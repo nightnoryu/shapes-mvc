@@ -11,9 +11,10 @@ type EditorViewProps = {
     shapes: ShapeViewInterface[]
     moveShape: (id: string, delta: Point) => void
     resizeShape: (id: string, callback: SetFrameCallback) => void
+    removeShape: (id: string) => void
 }
 
-function EditorView({ shapes, moveShape, resizeShape }: EditorViewProps): JSX.Element {
+function EditorView({ shapes, moveShape, resizeShape, removeShape }: EditorViewProps): JSX.Element {
     const ref = useRef(null)
     const scaleFactor = useScaleFactorForDragAndDrop(ref, Settings.DOCUMENT_WIDTH)
 
@@ -31,6 +32,7 @@ function EditorView({ shapes, moveShape, resizeShape }: EditorViewProps): JSX.El
                     scaleFactor={scaleFactor}
                     moveShape={moveShape}
                     resizeShape={resizeShape}
+                    removeShape={removeShape}
                 />
             ))}
         </svg>

@@ -13,22 +13,13 @@ type ViewProps = {
 }
 
 function View({ shapes, controller }: ViewProps): JSX.Element {
-    const addRectangle = () => {
-        controller.addShape(ShapeType.RECTANGLE)
-    }
-    const addTriangle = () => {
-        controller.addShape(ShapeType.TRIANGLE)
-    }
-    const addEllipse = () => {
-        controller.addShape(ShapeType.ELLIPSE)
-    }
+    const addRectangle = () => controller.addShape(ShapeType.RECTANGLE)
+    const addTriangle = () => controller.addShape(ShapeType.TRIANGLE)
+    const addEllipse = () => controller.addShape(ShapeType.ELLIPSE)
 
-    const moveShape = (id: string, delta: Point) => {
-        controller.moveShape(id, delta.x, delta.y)
-    }
-    const resizeShape = (id: string, callback: SetFrameCallback) => {
-        controller.setShapeFrame(id, callback)
-    }
+    const moveShape = (id: string, delta: Point) => controller.moveShape(id, delta.x, delta.y)
+    const resizeShape = (id: string, callback: SetFrameCallback) => controller.setShapeFrame(id, callback)
+    const removeShape = (id: string) => controller.removeShape(id)
 
     return (
         <div className="View">
@@ -41,6 +32,7 @@ function View({ shapes, controller }: ViewProps): JSX.Element {
                 shapes={shapes}
                 moveShape={moveShape}
                 resizeShape={resizeShape}
+                removeShape={removeShape}
             />
         </div>
     )

@@ -13,15 +13,17 @@ import useShapeResize from '../../../hooks/shapes/useShapeResize'
 import { SetFrameCallback } from '../../../model/EditorInterface'
 import Frame from '../../../model/common/Frame'
 import Dimensions from '../../../model/common/Dimensions'
+import useHotkey from '../../../hooks/common/useHotkey'
 
 type RectangleViewProps = {
     shape: ShapeViewInterface
     scaleFactor: number
     moveShape: (id: string, delta: Point) => void
     resizeShape: (id: string, callback: SetFrameCallback) => void
+    removeShape: (id: string) => void
 }
 
-function ShapeView({ shape, scaleFactor, moveShape, resizeShape }: RectangleViewProps): JSX.Element {
+function ShapeView({ shape, scaleFactor, moveShape, resizeShape, removeShape }: RectangleViewProps): JSX.Element {
     const ref = useRef(null)
     const resizeAnchorRef = useRef(null)
     const [isSelected, setIsSelected] = useState(false)
@@ -46,6 +48,12 @@ function ShapeView({ shape, scaleFactor, moveShape, resizeShape }: RectangleView
         resizeShape,
         resizeAnchorRef,
     )
+
+    useHotkey('Delete', () => {
+        if (isSelected) {
+            removeShape(shape.getId())
+        }
+    })
 
     const resizeAnchorDelta = getResizeAnchorTranslateDelta(shape.getFrame(), delta, dimensions)
 
