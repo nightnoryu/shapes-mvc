@@ -1,4 +1,3 @@
-import ShapeViewInterface from '../../../model/ShapeViewInterface'
 import React from 'react'
 import Dimensions from '../../../model/common/Dimensions'
 import Point from '../../../model/common/Point'
@@ -6,10 +5,11 @@ import ShapeType from '../../../model/ShapeType'
 import Rectangle from './Shapes/Rectangle/Rectangle'
 import Triangle from './Shapes/Triangle/Triangle'
 import Ellipse from './Shapes/Ellipse/Ellipse'
+import ShapeInterface from '../../../model/ShapeInterface'
 
 class ShapeViewFactory {
     static create(
-        shape: ShapeViewInterface,
+        shape: ShapeInterface,
         ref: React.MutableRefObject<null>,
         delta: Point,
         dimensions: Dimensions,

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import Point from '../../model/common/Point'
 import useDragAndDrop from '../dragAndDrop/useDragAndDrop'
-import ShapeViewInterface from '../../model/ShapeViewInterface'
 import Dimensions from '../../model/common/Dimensions'
+import ShapeInterface from '../../model/ShapeInterface'
 
 function useShapeResize<T extends SVGElement>(
-    shape: ShapeViewInterface,
+    shape: ShapeInterface,
     scaleFactor: number,
     setShapeFrame: (shapeId: string, dimensions: Dimensions) => void,
     ref: React.RefObject<T>,

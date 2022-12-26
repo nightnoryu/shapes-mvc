@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react'
-import ShapeViewInterface from '../../../model/ShapeViewInterface'
 import useShapeDragAndDrop from '../../../hooks/shapes/useShapeDragAndDrop'
 import Point from '../../../model/common/Point'
 import SelectedOverlay from './SelectedOverlay/SelectedOverlay'
@@ -10,9 +9,10 @@ import Frame from '../../../model/common/Frame'
 import Dimensions from '../../../model/common/Dimensions'
 import useHotkey from '../../../hooks/common/useHotkey'
 import ShapeViewFactory from './ShapeViewFactory'
+import ShapeInterface from '../../../model/ShapeInterface'
 
 type RectangleViewProps = {
-    shape: ShapeViewInterface
+    shape: ShapeInterface
     scaleFactor: number
     moveShape: (id: string, delta: Point) => void
     resizeShape: (id: string, dimensions: Dimensions) => void

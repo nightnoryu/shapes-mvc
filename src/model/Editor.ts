@@ -1,12 +1,11 @@
 import ShapeInterface from './ShapeInterface'
 import { EditorInterface, Listener, SetFrameCallback } from './EditorInterface'
-import ShapeViewInterface from './ShapeViewInterface'
 
 class Editor implements EditorInterface {
     private _shapes: ShapeInterface[] = []
     private _listeners: Listener[] = []
 
-    getShapes(): ShapeViewInterface[] {
+    getShapes(): ShapeInterface[] {
         return this._shapes
     }
 

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import useDragAndDrop from '../dragAndDrop/useDragAndDrop'
 import Point from '../../model/common/Point'
-import ShapeViewInterface from '../../model/ShapeViewInterface'
+import ShapeInterface from '../../model/ShapeInterface'
 
 function useShapeDragAndDrop<T extends SVGElement>(
     ref: React.RefObject<T> | null,
-    shape: ShapeViewInterface,
+    shape: ShapeInterface,
     scaleFactor: number,
     isSelected: boolean,
     setIsSelected: (isSelected: boolean) => void,

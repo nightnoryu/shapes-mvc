@@ -1,12 +1,11 @@
 import ShapeInterface from './ShapeInterface'
 import Frame from './common/Frame'
-import ShapeViewInterface from './ShapeViewInterface'
 
 type Listener = () => void
 type SetFrameCallback = (frame: Frame) => Frame
 
 interface EditorInterface {
-    getShapes(): ShapeViewInterface[]
+    getShapes(): ShapeInterface[]
 
     addShape(shape: ShapeInterface): void
 

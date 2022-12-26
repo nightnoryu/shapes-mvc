@@ -1,10 +1,10 @@
 import { ForwardedRef, forwardRef } from 'react'
 import Point from '../../../../model/common/Point'
-import ShapeViewInterface from '../../../../model/ShapeViewInterface'
 import Settings from '../../../../model/Settings'
+import ShapeInterface from '../../../../model/ShapeInterface'
 
 type ResizeAnchorProps = {
-    shape: ShapeViewInterface
+    shape: ShapeInterface
     delta: Point
 }
 

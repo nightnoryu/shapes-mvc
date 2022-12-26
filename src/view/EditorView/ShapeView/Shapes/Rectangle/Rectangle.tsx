@@ -1,11 +1,11 @@
 import React, { ForwardedRef, forwardRef } from 'react'
 import Settings from '../../../../../model/Settings'
-import ShapeViewInterface from '../../../../../model/ShapeViewInterface'
 import Point from '../../../../../model/common/Point'
 import Dimensions from '../../../../../model/common/Dimensions'
+import ShapeInterface from '../../../../../model/ShapeInterface'
 
 type RectangleViewProps = {
-    shape: ShapeViewInterface
+    shape: ShapeInterface
     delta: Point
     dimensions: Dimensions
 }

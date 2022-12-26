@@ -1,14 +1,14 @@
 import React from 'react'
 import Menu from './Menu/Menu'
 import EditorView from './EditorView/EditorView'
-import ShapeViewInterface from '../model/ShapeViewInterface'
 import EditorControllerInterface from '../controller/EditorControllerInterface'
 import ShapeType from '../model/ShapeType'
 import Point from '../model/common/Point'
 import Dimensions from '../model/common/Dimensions'
+import ShapeInterface from '../model/ShapeInterface'
 
 type ViewProps = {
-    shapes: ShapeViewInterface[]
+    shapes: ShapeInterface[]
     controller: EditorControllerInterface
 }
 

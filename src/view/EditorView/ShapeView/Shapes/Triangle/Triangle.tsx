@@ -1,11 +1,11 @@
 import React, { ForwardedRef, forwardRef } from 'react'
 import Point from '../../../../../model/common/Point'
 import Settings from '../../../../../model/Settings'
-import ShapeViewInterface from '../../../../../model/ShapeViewInterface'
 import Dimensions from '../../../../../model/common/Dimensions'
+import ShapeInterface from '../../../../../model/ShapeInterface'
 
 type TriangleViewProps = {
-    shape: ShapeViewInterface
+    shape: ShapeInterface
     delta: Point
     dimensions: Dimensions
 }
@@ -21,7 +21,7 @@ const Triangle = forwardRef(({ shape, delta, dimensions }: TriangleViewProps, re
     )
 })
 
-function getTrianglePointsAsPath(triangle: ShapeViewInterface, delta: Point, dimensions: Dimensions): string {
+function getTrianglePointsAsPath(triangle: ShapeInterface, delta: Point, dimensions: Dimensions): string {
     const points = calculateTrianglePoints(triangle, dimensions)
 
     return points
@@ -29,7 +29,7 @@ function getTrianglePointsAsPath(triangle: ShapeViewInterface, delta: Point, dim
         .join(' ')
 }
 
-export function calculateTrianglePoints(triangle: ShapeViewInterface, dimensions: Dimensions): [Point, Point, Point] {
+export function calculateTrianglePoints(triangle: ShapeInterface, dimensions: Dimensions): [Point, Point, Point] {
     const leftTop = triangle.getFrame().leftTop
 
     const firstPoint = {
