@@ -1,19 +1,9 @@
 import EditorControllerInterface from './EditorControllerInterface'
 import ShapeType from '../model/ShapeType'
-import Shape from '../model/Shape'
-import { v4 as generateUuid } from 'uuid'
 import { EditorInterface } from '../model/EditorInterface'
+import ShapeFactory from '../factory/ShapeFactory'
 
 class EditorController implements EditorControllerInterface {
-    private static readonly _DEFAULT_FRAME = {
-        leftTop: {
-            x: 100,
-            y: 100,
-        },
-        width: 100,
-        height: 100,
-    }
-
     private readonly _editor: EditorInterface
 
     constructor(editor: EditorInterface) {
@@ -21,7 +11,7 @@ class EditorController implements EditorControllerInterface {
     }
 
     addShape(type: ShapeType): void {
-        this._editor.addShape(new Shape(generateUuid(), type, EditorController._DEFAULT_FRAME))
+        this._editor.addShape(ShapeFactory.create(type))
     }
 
     removeShape(id: string): void {
