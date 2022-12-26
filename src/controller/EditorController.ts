@@ -1,7 +1,7 @@
 import EditorControllerInterface from './EditorControllerInterface'
 import ShapeType from '../model/ShapeType'
 import Shape from '../model/Shape'
-import { v4 as uuid } from 'uuid'
+import { v4 as generateUuid } from 'uuid'
 import { EditorInterface } from '../model/EditorInterface'
 
 class EditorController implements EditorControllerInterface {
@@ -21,7 +21,7 @@ class EditorController implements EditorControllerInterface {
     }
 
     addShape(type: ShapeType): void {
-        this._editor.addShape(new Shape(uuid(), type, EditorController._DEFAULT_FRAME))
+        this._editor.addShape(new Shape(generateUuid(), type, EditorController._DEFAULT_FRAME))
     }
 
     removeShape(id: string): void {
