@@ -28,6 +28,7 @@ function EditorView({ shapes, moveShape, resizeShape, removeShape }: EditorViewP
         >
             {shapes.map(shape => (
                 <ShapeView
+                    key={shape.getId()}
                     shape={shape}
                     scaleFactor={scaleFactor}
                     moveShape={moveShape}
