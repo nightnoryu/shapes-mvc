@@ -33,7 +33,7 @@ function ShapeView({ shape, scaleFactor, moveShape, resizeShape, removeShape }: 
 
     // TODO
     // 1. selection z-index
-    // 2. shit with selection + deletion - isSelected problem
+    // maybe just move SelectedOverlay as last element in EditorView and store selected shape ID in there as well
     const delta = useShapeDragAndDrop(
         ref,
         shape,
