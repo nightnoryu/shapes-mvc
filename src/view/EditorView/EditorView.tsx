@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import Settings from '../../model/Settings'
 import styles from './EditorView.module.css'
 import useScaleFactorForDragAndDrop from '../../hooks/dragAndDrop/useScaleFactorForDragAndDrop'
@@ -6,8 +6,8 @@ import Point from '../../model/common/Point'
 import ShapeView from './ShapeView/ShapeView'
 import Dimensions from '../../model/common/Dimensions'
 import ShapeInterface from '../../model/ShapeInterface'
-import useEventListener from '../../hooks/common/useEventListener'
-import useHotkey from '../../hooks/common/useHotkey'
+import useShapeSelection from '../../hooks/shapes/useShapeSelection'
+import useShapeDeletion from '../../hooks/shapes/useShapeDeletion'
 
 type EditorViewProps = {
     shapes: ShapeInterface[]
@@ -18,20 +18,9 @@ type EditorViewProps = {
 
 function EditorView({ shapes, moveShape, resizeShape, removeShape }: EditorViewProps): JSX.Element {
     const ref = useRef(null)
-    const [selectedId, setSelectedId] = useState('')
+    const { selectedId, setSelectedId } = useShapeSelection(ref)
     const scaleFactor = useScaleFactorForDragAndDrop(ref, Settings.DOCUMENT_WIDTH)
-
-    useEventListener('mousedown', event => {
-        if (event.target === ref.current) {
-            setSelectedId('')
-        }
-    })
-
-    useHotkey('Delete', () => {
-        if (selectedId !== '') {
-            removeShape(selectedId)
-        }
-    })
+    useShapeDeletion(selectedId, removeShape)
 
     return (
         <svg

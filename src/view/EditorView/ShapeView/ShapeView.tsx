@@ -26,13 +26,11 @@ function ShapeView(
         scaleFactor,
         moveShape,
         resizeShape,
-    }: RectangleViewProps) {
+    }: RectangleViewProps,
+) {
     const ref = useRef(null)
     const resizeAnchorRef = useRef(null)
 
-    // TODO
-    // 1. selection z-index
-    // maybe just move SelectedOverlay as last element in EditorView and store selected shape ID in there as well
     const delta = useShapeDragAndDrop(
         ref,
         shape,
