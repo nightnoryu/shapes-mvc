@@ -1,8 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import useShapeDragAndDrop from '../../../hooks/shapes/useShapeDragAndDrop'
 import Point from '../../../model/common/Point'
 import SelectedOverlay from './SelectedOverlay/SelectedOverlay'
-import useOnClickOutside from '../../../hooks/common/useOnClickOutside'
 import ResizeAnchor from './ResizeAnchor/ResizeAnchor'
 import useShapeResize from '../../../hooks/shapes/useShapeResize'
 import Frame from '../../../model/common/Frame'
@@ -13,23 +12,26 @@ import ShapeInterface from '../../../model/ShapeInterface'
 
 type RectangleViewProps = {
     shape: ShapeInterface
+    isSelected: boolean
+    setSelectedId: (id: string) => void
     scaleFactor: number
     moveShape: (id: string, delta: Point) => void
     resizeShape: (id: string, dimensions: Dimensions) => void
     removeShape: (id: string) => void
 }
 
-function ShapeView({ shape, scaleFactor, moveShape, resizeShape, removeShape }: RectangleViewProps): JSX.Element {
+function ShapeView(
+    {
+        shape,
+        isSelected,
+        setSelectedId,
+        scaleFactor,
+        moveShape,
+        resizeShape,
+        removeShape,
+    }: RectangleViewProps) {
     const ref = useRef(null)
     const resizeAnchorRef = useRef(null)
-    // TODO: extract isSelected
-    const [isSelected, setIsSelected] = useState(false)
-
-    useOnClickOutside(
-        () => setIsSelected(false),
-        ref,
-        [resizeAnchorRef],
-    )
 
     // TODO
     // 1. selection z-index
@@ -38,8 +40,8 @@ function ShapeView({ shape, scaleFactor, moveShape, resizeShape, removeShape }: 
         ref,
         shape,
         scaleFactor,
-        false,
-        setIsSelected,
+        isSelected,
+        () => setSelectedId(shape.getId()),
         delta => moveShape(shape.getId(), delta),
     )
     const dimensions = useShapeResize(

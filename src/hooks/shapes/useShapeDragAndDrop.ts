@@ -8,7 +8,7 @@ function useShapeDragAndDrop<T extends SVGElement>(
     shape: ShapeInterface,
     scaleFactor: number,
     isSelected: boolean,
-    setIsSelected: (isSelected: boolean) => void,
+    selectShape: () => void,
     moveShape: (delta: Point) => void,
 ): Point {
     const [delta, setDelta] = useState({ x: 0, y: 0 })
@@ -21,7 +21,7 @@ function useShapeDragAndDrop<T extends SVGElement>(
         }
 
         if (!isSelected) {
-            setIsSelected(true)
+            selectShape()
         }
     }
 

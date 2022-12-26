@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Settings from '../../model/Settings'
 import styles from './EditorView.module.css'
 import useScaleFactorForDragAndDrop from '../../hooks/dragAndDrop/useScaleFactorForDragAndDrop'
@@ -16,6 +16,7 @@ type EditorViewProps = {
 
 function EditorView({ shapes, moveShape, resizeShape, removeShape }: EditorViewProps): JSX.Element {
     const ref = useRef(null)
+    const [selectedId, setSelectedId] = useState('')
     const scaleFactor = useScaleFactorForDragAndDrop(ref, Settings.DOCUMENT_WIDTH)
 
     return (
@@ -30,6 +31,8 @@ function EditorView({ shapes, moveShape, resizeShape, removeShape }: EditorViewP
                 <ShapeView
                     key={shape.getId()}
                     shape={shape}
+                    isSelected={shape.getId() === selectedId}
+                    setSelectedId={setSelectedId}
                     scaleFactor={scaleFactor}
                     moveShape={moveShape}
                     resizeShape={resizeShape}
