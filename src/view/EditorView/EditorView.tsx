@@ -6,6 +6,7 @@ import Point from '../../model/common/Point'
 import ShapeView from './ShapeView/ShapeView'
 import Dimensions from '../../model/common/Dimensions'
 import ShapeInterface from '../../model/ShapeInterface'
+import useEventListener from '../../hooks/common/useEventListener'
 
 type EditorViewProps = {
     shapes: ShapeInterface[]
@@ -18,6 +19,12 @@ function EditorView({ shapes, moveShape, resizeShape, removeShape }: EditorViewP
     const ref = useRef(null)
     const [selectedId, setSelectedId] = useState('')
     const scaleFactor = useScaleFactorForDragAndDrop(ref, Settings.DOCUMENT_WIDTH)
+
+    useEventListener('mousedown', event => {
+        if (event.target === ref.current) {
+            setSelectedId('')
+        }
+    })
 
     return (
         <svg
