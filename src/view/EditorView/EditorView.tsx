@@ -7,6 +7,7 @@ import ShapeView from './ShapeView/ShapeView'
 import Dimensions from '../../model/common/Dimensions'
 import ShapeInterface from '../../model/ShapeInterface'
 import useEventListener from '../../hooks/common/useEventListener'
+import useHotkey from '../../hooks/common/useHotkey'
 
 type EditorViewProps = {
     shapes: ShapeInterface[]
@@ -23,6 +24,12 @@ function EditorView({ shapes, moveShape, resizeShape, removeShape }: EditorViewP
     useEventListener('mousedown', event => {
         if (event.target === ref.current) {
             setSelectedId('')
+        }
+    })
+
+    useHotkey('Delete', () => {
+        if (selectedId !== '') {
+            removeShape(selectedId)
         }
     })
 
@@ -43,7 +50,6 @@ function EditorView({ shapes, moveShape, resizeShape, removeShape }: EditorViewP
                     scaleFactor={scaleFactor}
                     moveShape={moveShape}
                     resizeShape={resizeShape}
-                    removeShape={removeShape}
                 />
             ))}
         </svg>
