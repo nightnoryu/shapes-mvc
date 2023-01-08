@@ -22,7 +22,7 @@ function EditorView({ shapes, moveShape, resizeShape, removeShape }: EditorViewP
     const ref = useRef(null)
     const { selectedShape, setSelectedShape } = useShapeSelection(ref)
     const scaleFactor = useScaleFactorForDragAndDrop(ref, Settings.DOCUMENT_WIDTH)
-    useShapeDeletion(selectedShape, setSelectedShape, removeShape)
+    useShapeDeletion(selectedShape, removeShape)
 
     return (
         <svg
@@ -47,14 +47,10 @@ function EditorView({ shapes, moveShape, resizeShape, removeShape }: EditorViewP
             ))}
             {
                 selectedShape &&
-                <SelectedOverlay
-                    frame={selectedShape.getFrame()}
-                    delta={delta}
-                    dimensions={{
-                        width: selectedShape.getFrame().width,
-                        height: selectedShape.getFrame().height,
-                    }}
-                />
+                <SelectedOverlay frame={selectedShape.getFrame()} delta={delta} dimensions={{
+                    width: selectedShape.getFrame().width,
+                    height: selectedShape.getFrame().height,
+                }} />
             }
         </svg>
     )
