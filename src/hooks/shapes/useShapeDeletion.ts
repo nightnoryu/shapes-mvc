@@ -1,13 +1,12 @@
 import useHotkey from '../common/useHotkey'
-import ShapeInterface from '../../model/ShapeInterface'
 
 function useShapeDeletion(
-    selectedShape: ShapeInterface | null,
+    selectedId: string,
     removeShape: (id: string) => void,
 ) {
     useHotkey('Delete', () => {
-        if (selectedShape) {
-            removeShape(selectedShape.getId())
+        if (selectedId !== '') {
+            removeShape(selectedId)
         }
     })
 }

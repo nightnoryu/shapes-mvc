@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
 import useEventListener from '../common/useEventListener'
-import ShapeInterface from '../../model/ShapeInterface'
 
 function useShapeSelection(ref: React.RefObject<SVGElement>) {
-    const [selectedShape, setSelectedShape] = useState<ShapeInterface | null>(null)
+    const [selectedId, setSelectedId] = useState('')
 
     useEventListener('mousedown', event => {
         if (event.target === ref.current) {
-            setSelectedShape(null)
+            setSelectedId('')
         }
     })
 
     return {
-        selectedShape,
-        setSelectedShape,
+        selectedId,
+        setSelectedId,
     }
 }
 
