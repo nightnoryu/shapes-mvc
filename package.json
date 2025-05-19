@@ -1,5 +1,6 @@
 {
   "name": "shapes-mvc",
+  "homepage": "https://nightnoryu.github.io/shapes-mvc",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
